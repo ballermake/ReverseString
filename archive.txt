@@ -1,0 +1,808 @@
+package main
+
+import "fmt"
+
+//1.
+func smallestPositive(num []int) int {
+	n := len(num)
+	for i := range num {
+		for num[i] >= 1 && num[i] <= n && num[i] != num[num[i]-1] {
+			num[i], num[num[i]-1] = num[num[i]-1], num[i]
+		}
+	}
+	for i, x := range num {
+		if i+1 != x {
+			return i + 1
+		}
+	}
+	return n + 1
+
+}
+
+//2.
+func twoSum(nums []int, target int) []int {
+	hasil := []int{}
+
+	for i := 0; i < len(nums); i++ {
+		for j := 0; j < len(nums); j++ {
+			if nums[i]+nums[j] == target && i != j {
+				hasil = []int{i, j}
+				return hasil
+			}
+		}
+
+	}
+	return hasil
+}
+
+//3.
+func romanToInt(input string) int {
+	arr := map[string]int{
+		"I": 1,
+		"V": 5,
+		"X": 10,
+		"L": 50,
+		"C": 100,
+		"D": 500,
+		"M": 1000,
+	}
+
+	lengthOfString := len(input)
+	lastElement := input[len(input)-1 : lengthOfString]
+
+	var result int
+	result = arr[lastElement]
+
+	for i := len(input) - 1; i > 0; i-- {
+		if arr[input[i:i+1]] <= arr[input[i-1:i]] {
+			result += arr[input[i-1:i]]
+		} else {
+			result -= arr[input[i-1:i]]
+		}
+	}
+	return result
+
+}
+
+//4.
+func integerToRomawi(input int) string {
+	var romawi string = ""
+	var angka = []int{1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000}
+	var romawiString = []string{"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"}
+
+	var index = len(romawiString) - 1
+
+	for input > 0 {
+		for angka[index] <= input {
+			romawi += romawiString[index]
+			input -= angka[index]
+		}
+		index -= 1
+	}
+	return romawi
+
+}
+
+func main() {
+	//1.
+	arr := []int{1, 2, 0}
+	fmt.Println(smallestPositive(arr))
+
+	//2.
+	arrr := []int{2, 7, 11, 15}
+	tgt := 9
+	fmt.Println(twoSum(arrr, tgt))
+
+	//3.
+	fmt.Println(romanToInt("III"))
+	fmt.Println(romanToInt("LVIII"))
+	fmt.Println(romanToInt("MCMXCIV"))
+
+	//4.
+	fmt.Println(integerToRomawi(3749))
+	fmt.Println(integerToRomawi(1994))
+	fmt.Println(integerToRomawi(58))
+}
+
+
+4.integerToRomawi
+
+package main
+
+import "fmt"
+
+func integerToRomawi(input int) string {
+	var romawi string = ""
+	var angka = []int{1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000}
+	var romawiString = []string{"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"}
+
+	var index = len(romawiString) - 1
+
+	for input > 0 {
+		for angka[index] <= input {
+			romawi += romawiString[index]
+			input -= angka[index]
+		}
+		index -= 1
+	}
+	return romawi
+
+}
+
+func main() {
+	fmt.Println(integerToRomawi(3749))
+	fmt.Println(integerToRomawi(1994))
+	fmt.Println(integerToRomawi(58))
+}
+
+
+3.romanToInt
+
+package main
+
+import "fmt"
+
+func romanToInt(input string) int {
+	arr := map[string]int{
+		"I": 1,
+		"V": 5,
+		"X": 10,
+		"L": 50,
+		"C": 100,
+		"D": 500,
+		"M": 1000,
+	}
+
+	lengthOfString := len(input)
+	lastElement := input[len(input)-1 : lengthOfString]
+
+	var result int
+	result = arr[lastElement]
+
+	for i := len(input) - 1; i > 0; i-- {
+		if arr[input[i:i+1]] <= arr[input[i-1:i]] {
+			result += arr[input[i-1:i]]
+		} else {
+			result -= arr[input[i-1:i]]
+		}
+	}
+	return result
+
+}
+
+func main() {
+	fmt.Println(romanToInt("III"))
+	fmt.Println(romanToInt("LVIII"))
+	fmt.Println(romanToInt("MCMXCIV"))
+}
+
+
+
+
+
+2.twoSum
+
+package main
+
+import "fmt"
+
+func twoSum(nums []int, target int) []int {
+	hasil := []int{}
+
+	for i := 0; i < len(nums); i++ {
+		for j := 0; j < len(nums); j++ {
+			if nums[i]+nums[j] == target && i != j {
+				hasil = []int{i, j}
+				return hasil
+			}
+		}
+
+	}
+	return hasil
+}
+
+func main() {
+	arrr := []int{2, 7, 11, 15}
+	tgt := 9
+	fmt.Println(twoSum(arrr, tgt))
+}
+
+
+
+1.smallestPositive
+
+package main
+
+import "fmt"
+
+func smallestPositive(num []int) int {
+	n := len(num)
+	for i := range num {
+		for num[i] >= 1 && num[i] <= n && num[i] != num[num[i]-1] {
+			num[i], num[num[i]-1] = num[num[i]-1], num[i]
+		}
+	}
+	for i, x := range num {
+		if i+1 != x {
+			return i + 1
+		}
+	}
+	return n + 1
+
+}
+func main() {
+	arr := []int{1, 2, 0}
+	fmt.Println(smallestPositive(arr))
+}
+
+//goroutine
+	func processNumber(items []int) int {
+	num := make(chan int)
+	res := make(chan int)
+	var wg sync.WaitGroup
+	hasil := 0
+
+	for _, i := range items {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			angka := <-num
+			angka = angka * angka
+			res <- angka
+
+		}(i)
+		num <- i
+		hasil += <-res
+	}
+	defer close(num)
+	defer close(res)
+	wg.Wait()
+	return hasil
+
+}
+
+func main() {
+	input := []int{2, 4, 6, 8, 10}
+	processNumber(input)
+}
+
+//goroutine
+func processNumber(bilangan int, wg *sync.WaitGroup, mu *sync.Mutex, hasilKuadrat chan<- int) {
+	mu.Lock()
+	kuadrat := bilangan * bilangan
+	hasilKuadrat <- kuadrat
+	defer wg.Done()
+	mu.Unlock()
+}
+
+func main() {
+	var wg sync.WaitGroup
+	var mu sync.Mutex
+	hasilKuadrat := make(chan int)
+	input := []int{2, 4, 6, 8, 10}
+	for i := range input {
+		wg.Add(i)
+		go processNumber(i, &wg, &mu, hasilKuadrat)
+
+	}
+
+	go func() {
+		wg.Wait()
+		close(hasilKuadrat)
+	}()
+
+	var hasil []int
+	for h := range hasilKuadrat {
+		hasil = append(hasil, h)
+	}
+	fmt.Println(hasil)
+}
+
+
+
+
+
+// Sistem Transaksi Bank
+
+// Deskripsi Masalah:
+// Ada akun bank dengan saldo tertentu.
+// Beberapa nasabah melakukan transaksi (penarikan atau setoran) secara bersamaan.
+// Kita harus memastikan bahwa tidak ada race condition,
+// yaitu tidak ada dua nasabah yang memodifikasi saldo akun secara bersamaan.
+// Di akhir, kita perlu mengetahui saldo akhir dari akun setelah semua transaksi selesai diproses.
+
+// Penyelesaian:
+
+// Goroutine: Digunakan untuk mensimulasikan nasabah yang melakukan transaksi secara bersamaan.
+
+// Channel: Digunakan untuk mengirim status transaksi dari goroutine ke fungsi utama.
+
+// WaitGroup: Digunakan untuk menunggu semua transaksi selesai diproses.
+
+// Mutex: Digunakan untuk memastikan bahwa hanya satu goroutine yang dapat memodifikasi saldo
+// akun pada satu waktu (menghindari race condition).
+
+// type BankAccount struct {
+// 	saldo int
+// 	mutex sync.Mutex
+// }
+
+// type UserBank struct {
+// 	ID     int
+// 	Nama   string
+// 	Saldo  int
+// 	Status string
+// }
+
+// func CekSaldo(akun *BankAccount, wg *sync.WaitGroup, channelGIRO chan<- string) {
+// 	defer wg.Done()
+
+// 	time.Sleep(time.Millisecond * 500)
+
+// 	akun.mutex.Lock()
+
+// 	if akun.saldo <= 0 {
+// 		channelGIRO <- "Saldo tidak mencukupi Jack, maaf."
+// 		return
+// 	}
+// 	channelGIRO <- fmt.Sprintf("Saldo sekarang adalah: %d", akun.saldo)
+
+// 	defer akun.mutex.Unlock()
+// }
+
+//func main() {
+// 	Tahapan := BankAccount{
+// 		saldo: 20000000,
+// 	}
+
+// 	transaksi := []UserBank{
+// 		{ID: 1, Nama: "Anna", Saldo: 15000000, Status: "setor"},
+// 		{ID: 2, Nama: "Gawon", Saldo: 23000000, Status: "tarik"},
+// 		{ID: 3, Nama: "Ella", Saldo: 50000000, Status: "setor"},
+// 	}
+
+// 	var wg sync.WaitGroup
+// 	channelGIRO := make(chan string)
+
+// 	for _, t := range transaksi {
+// 		wg.Add(1)
+// 		go func(t UserBank) {
+// 			defer wg.Done()
+// 			time.Sleep(time.Millisecond * 3000)
+// 			Tahapan.mutex.Lock()
+
+// 			if t.Status == "tarik" {
+// 				if Tahapan.saldo < t.Saldo {
+// 					channelGIRO <- fmt.Sprintf("Gagal karena saldo nya %s gak cukup.", t.Nama)
+// 				} else {
+// 					Tahapan.saldo -= t.Saldo
+// 					channelGIRO <- fmt.Sprintf("%s berhasil menarik %d. Saldo balance : %d",
+// 						t.Nama, t.Saldo, Tahapan.saldo)
+// 				}
+// 			} else if t.Status == "setor" {
+// 				Tahapan.saldo += t.Saldo
+// 				channelGIRO <- fmt.Sprintf("%s berhasil nyetor %d. Saldo balance: %d", t.Nama, t.Saldo,
+// 					Tahapan.saldo)
+// 			}
+// 			defer Tahapan.mutex.Unlock()
+// 		}(t)
+// 	}
+
+// 	go func() {
+// 		wg.Wait()
+// 		close(channelGIRO)
+// 	}()
+
+// 	for msg := range channelGIRO {
+// 		fmt.Println(msg)
+// 	}
+
+// }
+
+
+
+WAITGROUP
+var totalTicket = 10
+
+var mutex sync.Mutex
+
+func main() {
+	var wg sync.WaitGroup
+
+	bookChannel := make(chan string)
+
+	for user := 1; user <= 15; user++ {
+		wg.Add(1)
+		go bookTicket(user, &wg, bookChannel)
+	}
+	go func() {
+		for booking := range bookChannel {
+			fmt.Println(booking)
+		}
+	}()
+	wg.Wait()
+	close(bookChannel)
+	fmt.Printf("Jumlah tiket tersisa %d\n", totalTicket)
+}
+
+func bookTicket(user int, wg *sync.WaitGroup, bookingChannel chan<- string) {
+	defer wg.Done()
+
+	time.Sleep(time.Millisecond * 500)
+
+	mutex.Lock()
+
+	if totalTicket > 0 {
+		totalTicket--
+		bookingChannel <- fmt.Sprintf("User %d berhasil memesan tiket.", user)
+	} else {
+		bookingChannel <- fmt.Sprintf("User %d gagal memesan tiket, habis terjual.", user)
+	}
+	mutex.Unlock()
+}
+
+GOROUTINE
+func main() {
+	//variable channel untuk komunikasi antar goroutine
+	channel := make(chan int)
+
+	//memulai proses goroutine
+	go printNumbers(channel)
+
+	//menerima data dari channel di goroutine
+	for number := range channel {
+		fmt.Println("Main Goroutine received: ", number)
+	}
+
+	fmt.Println("selesai")
+}
+
+func printNumbers(channel chan int) {
+	for i := 1; i <= 5; i++ {
+		fmt.Println("Goroutine", i)
+		channel <- i                        //mengirim data ke channel
+		time.Sleep(time.Millisecond * 5000) //simulasi proses
+	}
+	close(channel) //menutup channel
+}
+
+1. Mengelola Data Karyawan
+Buatlah program Golang untuk mengelola data karyawan menggunakan struct dan method.
+Setiap karyawan memiliki nama, umur, dan jabatan.
+Implementasikan method untuk menampilkan informasi karyawan dan untuk memperbarui jabatan karyawan.
+
+type Karyawan struct {
+	Nama    string
+	umur    int
+	Jabatan string
+}
+
+func (k Karyawan) DisplayInfo() {
+	fmt.Printf("Nama %s, Umur %d, Jabatan %s\n", k.Nama, k.umur, k.Jabatan)
+}
+
+func (k *Karyawan) UpdateJabatan(jabatanBaru string) {
+	k.Jabatan = jabatanBaru
+}
+
+func main() {
+	data := Karyawan{
+		Nama:    "Gawon",
+		umur:    19,
+		Jabatan: "Secretary",
+	}
+
+	data.DisplayInfo()
+	data.UpdateJabatan("HRD")
+	data.DisplayInfo()
+}
+
+2. Menghitung Luas Bentuk Geometri
+Buatlah interface Shape yang memiliki method Area().
+Implementasikan interface tersebut pada struct Circle dan Rectangle
+untuk menghitung luas lingkaran dan persegi panjang.
+
+type Shape interface {
+	Area()
+}
+
+type Circle struct {
+	Radius float64
+}
+
+type Rectangle struct {
+	SideA float64
+	SideB float64
+}
+
+func (c Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
+}
+
+func (r Rectangle) Area() float64 {
+	return r.SideA * r.SideB
+}
+
+func main() {
+	A := Circle{
+		Radius: 13,
+	}
+	B := Rectangle{
+		SideA: 26,
+		SideB: 31,
+	}
+	fmt.Printf("Circle Area %.2f\n", A.Area())
+	fmt.Printf("Rectangle Area %.2f\n", B.Area())
+}
+
+1.
+var namaPertama string = "Pakubuwono"
+var namaTerakhir string = "Raya"
+var umur int = 38
+pekerjaan := "Manager Properti"
+fmt.Println("Nama:", namaPertama, namaTerakhir)
+fmt.Println("Umur:", umur)
+fmt.Println("Pekerjaan:", pekerjaan)
+
+2.
+a := 10
+b := 4
+h1 := a + b
+fmt.Println("Penjumlahan a + b =", h1)
+h2 := a - b
+fmt.Println("Pengurangan a - b =", h2)
+h3 := a * b
+fmt.Println("Perkalian a * b =", h3)
+h4 := a / b
+fmt.Println("Pembagian a / b =", h4)
+h5 := a % b
+fmt.Println("Sisa bagi(modulus) a `%` b =", h5)
+
+3.
+var n int = 85
+if n >= 85 {
+	fmt.Println("Nilai A")
+} else if 70 <= n {
+	fmt.Println("Nilai B")
+} else if 50 <= n {
+	fmt.Println("Nilai C")
+} else if n < 50 {
+	fmt.Println("Nilai D")
+}
+
+4.
+for i := 1; i <= 20; i++ {
+	if i%2 == 1 {
+		fmt.Println("Bilangan ganjil:", i)
+	}
+}
+
+5.
+namaLengkap := "Pakubuwono Raya"
+	for i, huruf := range namaLengkap {
+		fmt.Println(i, huruf)
+	}
+
+person := "raya"
+var addressMemory *string = &person
+
+fmt.Println("nama person:", person)
+fmt.Println("alamat person:", addressMemory)
+fmt.Println("nilai di alamat person:", *addressMemory)
+
+*addressMemory = "mika"
+fmt.Println("Nilai person setelah perubahan:", person)
+
+var name string = "mika"
+changeValue(&name)
+fmt.Println(name)
+
+var menyapa, _ = sayHalo("Mika", "Jkt", 28)
+fmt.Println(menyapa)
+
+absen(28, "maudy", "mika", "tamba")
+
+}
+
+func absen(age int, names ...string) {
+fmt.Println(names)
+}
+
+func sayHalo(name, address string, age int) (result string, umurPlusSatu int) {
+result = "Hi " + name + ", are you live " + address
+umurPlusSatu = age + 1
+return result, umurPlusSatu
+
+}
+
+func changeValue(name *string) {
+*name = "tamba"
+
+Mas, kalau error :
+./main.go:7:3: unknown field Name in struct literal of type farm.Anjing
+./main.go:8:3: unknown field Attack in struct literal of type farm.Anjing
+
+kenapa ya
+( package saya  nama nya farm )
+main.go :
+package main
+
+import "project-go/farm"
+
+func main() {
+    huskey := farm.Anjing{
+        Name:   "Huskey",
+        Attack: "Gigit",
+    }
+    huskey.Speak()
+}
+
+farm=>animal.go
+package farm
+
+import "fmt"
+
+type AnimalInterface interface {
+    Speak()
+    Attack()
+}
+type Animal struct {
+    Name          string
+    GayaMenyerang string
+}
+type Anjing struct {
+    Animal
+}
+
+func (a Anjing) Speak() {
+    fmt.Println("Woof")
+}
+func (a Anjing) Attack() {
+    fmt.Println("Anjing menyerang dengan gigit", a.GayaMenyerang)
+}
+
+type Kucing struct {
+    Animal
+}
+
+func (k Kucing) Speak() {
+    fmt.Println("Meow")
+}
+func (k Kucing) Attack() {
+    fmt.Println("Kucing menyerang dengan cakar", k.GayaMenyerang)
+}
+
+func farm() {
+
+}
+
+Assignment Day 10
+1.
+type Transformer struct {
+	Make   string
+	Model  int
+	Miners bool
+}
+
+func transformerOne(t *Transformer, newMake string, newModel int) {
+	t.Make = newMake
+	t.Model = newModel
+}
+
+func withoutPointer(t Transformer, newMake string, newModel int) {
+	t.Make = newMake
+	t.Model = newModel
+}
+
+func main() {
+
+	autoBot := &Transformer{Make: "Bumblebee", Model: 127, Miners: true}
+	autoBot1 := Transformer{Make: "Bumblebee", Model: 127, Miners: true}
+
+	fmt.Printf("Initial Make: %s, Model B%d\n", autoBot.Make, autoBot.Model)
+
+	transformerOne(autoBot, "Starscream", 22)
+	fmt.Printf("Updated Make: %s, Model F%d\n", autoBot.Make, autoBot.Model)
+
+	withoutPointer(autoBot1, "Sentinel", 923)
+	fmt.Printf("Updated Make: %s, Model F%d\n", autoBot.Make, autoBot.Model)
+}
+
+2.
+func totalPrice(finalPrice int) (int, int) {
+	var discount = finalPrice * 10 / 100
+	if finalPrice > 1000000 {
+		finalPrice = finalPrice - discount
+	} else {
+		discount = 0
+	}
+	return finalPrice, discount
+}
+
+func main() {
+
+	finalPrice, discount := totalPrice(1200000)
+	fmt.Printf("Harga akhir setelah diskon: %d \nJumlah diskon yang diterima pelanggan: %d", finalPrice, discount)
+}
+
+5.
+type Employee interface {
+	GetSalary() int
+}
+
+type FullTimeEmployee struct {
+	Name          string
+	MonthlySalary int
+}
+
+type PartTimeEmployee struct {
+	Name        string
+	HourlyRate  int
+	HoursWorked int
+}
+
+func (f FullTimeEmployee) GetSalary() int {
+	return f.MonthlySalary
+}
+
+func (p PartTimeEmployee) GetSalary() int {
+	return p.HourlyRate * p.HoursWorked
+}
+
+func main() {
+	fte := FullTimeEmployee{
+		MonthlySalary: 30000000,
+	}
+	PrintFullTimeEmployee(fte)
+
+	pte := PartTimeEmployee{
+		HourlyRate:  100000,
+		HoursWorked: 225,
+	}
+	PrintPartTimeEmployee(pte)
+}
+
+func PrintFullTimeEmployee(f Employee) {
+	fmt.Println(f.GetSalary())
+}
+
+func PrintPartTimeEmployee(p Employee) {
+	fmt.Println(p.GetSalary())
+}
+
+
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func processNumber(items []int) int {
+	num := make(chan int)
+	res := make(chan int)
+	var wg sync.WaitGroup
+	hasil := 0
+
+	for _, i := range items {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			angka := <-num
+			angka = angka * angka
+			res <- angka
+		}(i)
+		num <- i
+		hasil += <-res
+	}
+	defer close(num)
+	defer close(res)
+	wg.Wait()
+	return hasil
+}
+
+func main() {
+	input := []int{2, 4, 6, 8, 10}
+	result := processNumber(input)
+	fmt.Println(result)
+}
